@@ -15,7 +15,7 @@
     </style>
   </head>
   <body>
-    <h1>Chat about Javascript</h1>
+    <!-- <h1>Chat about Javascript</h1> -->
     <div class="container">
       <div class="row">
         <ul id='messages'>
@@ -26,7 +26,7 @@
         <div class="col-xs-12">
           <form id="message-form" action="">
             <div class="input-group">
-              <input id="m" autocomplete="aff" type="text" class="form-control" placeholder="Message...."
+              <input id="m" autocomplete="off" type="text" class="form-control" placeholder="Message...."
               arial-label="Message...">
               <span class="input-group-btn">
                 <button class="btn btn-success" type="submit">Send!</button>
@@ -40,5 +40,34 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- Grapping the client from socket.io -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const room = 'Javascript';
+      //We are connecting to the socket '/tech'
+      const socket = io.connect('/tech');
+      //submitting the form using Jquery, not the submit html attr
+      $("form").submit(()=>{
+        let msg = $('#m').val();
+        //seding a msg to the socket server. Specifing the message(msg) and from where!(room).
+        //Specify the room is probbly usefull to socket.io in order to know to who broadcast
+        // the message later.
+        socket.emit('message', {msg, room});
+        $('#m').val('');
+        return false
+      });
+
+      socket.on('connect', ()=> {
+        socket.emit('join', {room: room});
+      });
+
+      //on message do something when the message is received or sent?
+      socket.on("message", (msg)=> {
+        $('#messages').append($('<li>').text(msg));
+      });
+
+    </script>
+
   </body>
 </html>
