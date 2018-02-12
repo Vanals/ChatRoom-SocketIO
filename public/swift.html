@@ -5,12 +5,29 @@
     <title>Chat about Swift</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style media="screen">
-      form{
+      form {
         padding: 30px;
         position: fixed;
         bottom: 0;
         width: 100%;
         padding-right: 100px;
+      }
+
+      #messages {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 100;
+      }
+
+      #messages li {
+        padding: 5px 10px;
+
+      }
+
+      #messages  li:nth-child(even) {
+        color: white;
+        background: gray;
       }
     </style>
   </head>
