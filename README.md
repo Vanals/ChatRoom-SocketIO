@@ -7,7 +7,6 @@ in the same room is able to send and receive messages in real time to all the us
 
 ![](https://image.ibb.co/dC33gS/Screen_Shot_2018_02_12_at_13_04_59.png)
 
-## How to use
 
 ## How to use
 
